@@ -23,10 +23,8 @@ function preload() {
 	game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 }
 
-let platforms;
-let player;
-let cursors;
-let stars;
+let platforms, player, cursors, stars, scoreText;
+let score = 0;
 
 function create() {
 	// Enable arcade physics system
@@ -74,6 +72,11 @@ function create() {
 		star.body.bounce.y = 0.7 + Math.random() * 0.2;
 	}
 
+	// Scoreboard
+	scoreText = game.add.text(16, 16, 'Score: 0', {
+		fontsize: '32px', fill: '#000'
+	});
+
 	// Create controls
 	cursors = game.input.keyboard.createCursorKeys();
 }
@@ -111,9 +114,13 @@ function update() {
 	}
 }
 
-// 'Collect' star - remove from screen
+// 'Collect' star
 function collectStar(player, star) {
+	// Remove from screen
 	star.kill();
+	// Increment score
+	score += 10;
+	scoreText.text = `Score: ${score} `;
 }
 
 </script>
