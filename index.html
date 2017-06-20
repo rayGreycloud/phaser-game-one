@@ -61,6 +61,8 @@ function create() {
 }
 
 function update() {
+	// Collide player with platforms
+	let hitPlatform = game.physics.arcade.collide(player, platforms);
 }
 
 </script>
