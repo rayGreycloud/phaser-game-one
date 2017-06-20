@@ -23,8 +23,28 @@ function preload() {
 	game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 }
 
+let platforms;
+
 function create() {
-	game.add.sprite(0, 0, 'star');
+	// Enable arcade physics system
+	game.physics.startSystem(Phaser.Physics.ARCADE);
+	// Simple background
+	game.add.sprite(0, 0, 'sky');
+	// platforms group
+	platforms = game.add.group();
+	// Enable physics for group
+	platforms.enableBody = true;
+	// Create the ground
+	let ground = platforms.create(0, game.world.height - 64, 'ground');
+	// Scale ground to fit width
+	ground.scale.setTo(2, 2);
+	// Stop ground from falling when jumped on
+	ground.body.immovable = true;
+	// Create ledges
+	let ledge = platforms.create(400, 400, 'ground');
+	ledge.body.immovable = true;
+	ledge = platforms.create(-150, 250, 'ground');
+	ledge.body.immovable = true;
 }
 
 function update() {
